@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="homeserver:war exploded">
+    <output-path>$PROJECT_DIR$/target/homeserver</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="homeserver/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="homeserver" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.inject:guice:3.0" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: com.google.inject.extensions:guice-servlet:3.0" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.3" />
+          <element id="library" level="project" name="Maven: org.restlet.jse:org.restlet:2.2-RC4" />
+          <element id="library" level="project" name="Maven: org.restlet.jee:org.restlet.ext.servlet:2.2.0" />
+          <element id="library" level="project" name="Maven: org.restlet.jee:org.restlet:2.2.0" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
