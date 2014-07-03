@@ -12,10 +12,14 @@
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: com.google.inject.extensions:guice-servlet:3.0" />
-          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.3" />
           <element id="library" level="project" name="Maven: org.restlet.jse:org.restlet:2.2-RC4" />
           <element id="library" level="project" name="Maven: org.restlet.jee:org.restlet.ext.servlet:2.2.0" />
           <element id="library" level="project" name="Maven: org.restlet.jee:org.restlet:2.2.0" />
+          <element id="library" level="project" name="Maven: com.pi4j:pi4j-device:0.0.5" />
+          <element id="library" level="project" name="Maven: com.pi4j:pi4j-core:0.0.5" />
+          <element id="library" level="project" name="Maven: com.pi4j:pi4j-gpio-extension:0.0.5" />
+          <element id="library" level="project" name="Maven: com.pi4j:pi4j-service:0.0.5" />
+          <element id="library" level="project" name="Maven: org.osgi:org.osgi.core:4.2.0" />
         </element>
       </element>
     </root>
