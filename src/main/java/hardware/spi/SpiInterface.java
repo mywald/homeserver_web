@@ -3,7 +3,10 @@ package hardware.spi;
 import com.google.inject.*;
 import com.pi4j.io.gpio.*;
 import com.pi4j.wiringpi.*;
+import org.apache.commons.io.*;
 
+import java.io.*;
+import java.lang.reflect.*;
 import java.nio.*;
 import java.util.logging.*;
 
@@ -15,10 +18,26 @@ public class SpiInterface {
     private GpioPinDigitalInput nIRQ;
 
     public SpiInterface() {
+        try {
+            FileUtils.cleanDirectory(new File(System.getProperty("java.io.tmpdir")));
+        } catch (Exception e) {
+            LOG.log(Level.INFO, "Could not clean lib folder", e);
+        }
+
+        try {
+            System.setProperty("java.library.path", System.getProperty("java.io.tmpdir"));
+
+            Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
+            fieldSysPath.setAccessible(true);
+            fieldSysPath.set(null, null);
+        } catch (Exception e) {
+            LOG.log(Level.INFO, "Could not init lib folder", e);
+        }
+
         gpio = GpioFactory.getInstance();
         nIRQ = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05, "nIRQ of RFM12B", PinPullResistance.OFF);
 
-        int fd = Spi.wiringPiSPISetup(0, 100000);
+        int fd = Spi.wiringPiSPISetup(0, 1000000);
         if (fd <= -1) {
             throw new RuntimeException("SPI SETUP FAILED");
         }
@@ -101,11 +120,11 @@ public class SpiInterface {
 
     private int send(int data, String msg) {
         LOG.finest("Sending Data to SPI (" + msg + "): " + data);
-        byte[] bytes = ByteBuffer.allocate(2).putShort((short)data).array();
+        byte[] bytes = ByteBuffer.allocate(2).putShort((short) data).array();
 
         Spi.wiringPiSPIDataRW(0, bytes, 2);
 
-        return ByteBuffer.wrap(bytes).getInt();
+        return ByteBuffer.wrap(bytes).getShort();
     }
 
     private void sleep(int ms) {

@@ -81,6 +81,12 @@
             <version>0.0.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>homeserver</finalName>
