@@ -2,6 +2,7 @@ package hardware;
 
 import com.google.inject.*;
 import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.*;
 import com.pi4j.wiringpi.*;
 
 import java.nio.*;
@@ -14,6 +15,7 @@ public class GpioHeader {
     private GpioController gpio;
     private GpioPinDigitalInput nIRQ;
 
+    @Inject
     public GpioHeader() {
         gpio = GpioFactory.getInstance();
         nIRQ = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05, "nIRQ of RFM12B", PinPullResistance.OFF);
@@ -22,7 +24,6 @@ public class GpioHeader {
         if (fd <= -1) {
             throw new RuntimeException("SPI SETUP FAILED");
         }
-
     }
 
     public int spi(int data, String msg) {
@@ -40,8 +41,15 @@ public class GpioHeader {
     }
 
 
-
     public void shutdown() {
         gpio.shutdown();
+    }
+
+    public void setnIRQListener(GpioPinListener listener) {
+        if (listener == null){
+            gpio.removeAllListeners();
+        } else {
+            gpio.addListener(listener, nIRQ);
+        }
     }
 }
